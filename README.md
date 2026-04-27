@@ -3,8 +3,8 @@ A python code that is able to able to take fasta files, and its database, and tr
 Download rename_strains.py & update the paths with your own customs path. 
 Once complete run the file in the same location of the input path.
 
-Installation Example 
-# RenamingGeneStrains
+
+# Installation Example 
 
 A Python script that takes FASTA files and a BLAST database to transform accession numbers into proper strain + gene names.
 
