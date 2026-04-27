@@ -1,12 +1,6 @@
 # RenamingGeneStrains
-A python code that is able to able to take fasta files, and its database, and transformed accessions numbers into its proper attached gene name.
-Download rename_strains.py & update the paths with your own customs path. 
-Once complete run the file in the same location of the input path.
-
-
-# Installation Example 
-
 A Python script that takes FASTA files and a BLAST database to transform accession numbers into proper strain + gene names.
+
 
 [![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Python](https://img.shields.io/badge/python-3.7+-blue.svg)](https://www.python.org/)
