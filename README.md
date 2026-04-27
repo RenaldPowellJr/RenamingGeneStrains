@@ -4,7 +4,30 @@ Download rename_strains.py & update the paths with your own customs path.
 Once complete run the file in the same location of the input path.
 
 Installation Example 
+# RenamingGeneStrains
 
+A Python script that takes FASTA files and a BLAST database to transform accession numbers into proper strain + gene names.
+
+[![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![Python](https://img.shields.io/badge/python-3.7+-blue.svg)](https://www.python.org/)
+
+## Features
+- Extracts strain names from BLAST DB descriptions
+- Handles duplicate strains (appends accession)
+- Fully configurable via USER INPUT section
+- Works with any species/gene/dataset
+
+## Requirements
+
+- BLAST+ tools (`blastdbcmd`)
+
+## Quick Start
+1. **Download** `strain_renamer.py`
+2. **Edit USER INPUT** section with your paths
+3. **Run**: `python strain_renamer.py`
+
+## Complete Script (Copy Button ⤴)
+```python
 import subprocess
 import os
 from Bio import SeqIO
@@ -34,12 +57,12 @@ for line in result.stdout.strip().split("\\n"):
         continue
     acc, description = parts
     if " strain " in description:
-        strain = description.split(" strain ")[1].split(" ")[0]
+        strain = description.split(" strain ").split(" ")[1]
     else:
         strain = (
             description.replace(species_name + " ", "")
-            .split(",")[0]
-            .split(" chromosome")[0]
+            .split(",")
+            .split(" chromosome")
             .strip()
         )
     accession_to_strain[acc] = strain
@@ -47,7 +70,7 @@ for line in result.stdout.strip().split("\\n"):
 seen_strain = {}
 renamed_records = []
 for record in SeqIO.parse(input_fasta, "fasta"):
-    acc = record.id.split("|")[0]
+    acc = record.id.split("|")
 
     if acc in accession_to_strain:
         strain_name = accession_to_strain[acc]
@@ -65,3 +88,4 @@ for record in SeqIO.parse(input_fasta, "fasta"):
 os.makedirs(os.path.dirname(output_fasta) or ".", exist_ok=True)
 SeqIO.write(renamed_records, output_fasta, "fasta")
 print(f"Output: {output_fasta}")
+```
